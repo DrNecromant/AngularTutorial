@@ -2,7 +2,22 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var session = require('express-session');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var Db = require('mongodb').Db;
+var Server = require('mongodb').Server;
+
+var db = new Db(
+  'tutor',
+  new Server("localhost", 27017, {safe: true}, {auto_reconnect: true}, {})
+);
+
+db.open(function(err) {
+  if (err) console.log(err);
+	else console.log("DB connection successful");
+  db.collection('notes', function(error, notes) {
+	   db.notes = notes;
+	});
+});
 
 app.use([
   express.static(path.join(__dirname, '..')),
