@@ -13,7 +13,7 @@ var db = new Db(
 
 db.open(function(err) {
   if (err) console.log(err);
-	else console.log("DB connection successful");
+	else console.log("Connected to localhost...");
   db.collection('notes', function(error, notes) {
 	   db.notes = notes;
 	});
@@ -21,28 +21,20 @@ db.open(function(err) {
 
 app.use([
   express.static(path.join(__dirname, '..')),
-  session({secret: 'angular_tutorial', resave: true, saveUninitialized: true}),
   bodyParser.urlencoded({extended: true}),
   bodyParser.json()
 ]);
 
-var notes_init = [
-  {text: "First note"},
-  {text: "Second note"},
-  {text: "Third note"}
-];
-
-app.get("/notes", function(req, res) {
-  if (!req.session.notes) {
-    req.session.notes = notes_init;
-  }
-  res.send(req.session.notes);
+app.get("/notes", function(req,res) {
+	db.notes.find(req.query).toArray(function(err, items) {
+		res.send(items);
+	});
 });
 
-app.post("/notes", function(req, res) {
-    var note = req.body;
-    req.session.notes.push(note);
+app.post("/notes", function(req,res) {
+  db.notes.insert(req.body).then(function() {
     res.end();
+  });
 });
 
 app.listen(8080);
