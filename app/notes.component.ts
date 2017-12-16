@@ -30,10 +30,7 @@ export class NotesComponent {
     });
   }
 
-  notes: Note[] = [
-    {text: "Note one"},
-    {text: "Note two"}
-  ]
+  notes: Note[];
 
   getNotes(): Promise<Note[]> {
     return this.http.get(this.notesUrl)
