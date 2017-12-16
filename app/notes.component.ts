@@ -42,10 +42,18 @@ export class NotesComponent {
     if (!notetext) return;  // do not add note if input is empty
     let note = { text: notetext };
     this.notes.push(note);
+    this.addNote(note);
   }
 
   remove(idx) {
     this.notes.splice(idx, 1);
   }
+
+  addNote(note:Note) {
+    this.http.post(this.notesUrl, note)
+      .toPromise()
+      .then(response => console.log("note sent, response", response));
+  }
+
 
 }
