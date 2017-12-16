@@ -62,6 +62,4 @@ export class NotesComponent {
       .toPromise()
       .then(response => console.log("note sent, response", response));
   }
-
-
 }

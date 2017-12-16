@@ -26,27 +26,23 @@ app.use([
   bodyParser.json()
 ]);
 
-app.get("/notes", function(req,res) {
+app.get("/notes", function(req, res) {
 	db.notes.find(req.query).toArray(function(err, items) {
 		res.send(items);
 	});
 });
 
-app.post("/notes", function(req,res) {
+app.post("/notes", function(req, res) {
   db.notes.insert(req.body).then(function() {
     res.end();
   });
 });
 
-app.delete("/notes", function(req,res) {
+app.delete("/notes", function(req, res) {
 	var id = new ObjectID(req.query.id);
 	db.notes.remove({_id: id}, function(err) {
-		if (err) {
-			console.log(err);
-			res.send("Failed");
-		} else {
-			res.send("Success");
-		}
+		if (err) console.log(err);
+		else res.end();
 	})
 });
 
