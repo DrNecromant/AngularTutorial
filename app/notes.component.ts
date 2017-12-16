@@ -22,20 +22,16 @@ interface Note {
 
 export class NotesComponent {
   private notesUrl = 'notes';
-
-  constructor(private http: Http) {
-    this.getNotes().then(notes => {
-      this.notes = notes;
-      console.log(notes);
-    });
-  }
-
   notes: Note[];
 
-  getNotes(): Promise<Note[]> {
-    return this.http.get(this.notesUrl)
-      .toPromise()
-      .then(response => response.json() as Note[]);
+  constructor(private http: Http) {
+    this.readNotes();
+  }
+
+  readNotes() {
+    this.getNotes().then(notes=>{
+      this.notes = notes;
+    });
   }
 
   add(notetext: string) {
@@ -47,6 +43,12 @@ export class NotesComponent {
 
   remove(idx) {
     this.notes.splice(idx, 1);
+  }
+
+  getNotes(): Promise<Note[]> {
+    return this.http.get(this.notesUrl)
+      .toPromise()
+      .then(response => response.json() as Note[]);
   }
 
   addNote(note:Note) {
