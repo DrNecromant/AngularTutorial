@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
 
 interface Note {
     text: string;
@@ -18,10 +21,25 @@ interface Note {
 })
 
 export class NotesComponent {
+  private notesUrl = 'http://localhost:8080/notes';
+
+  constructor(private http: Http) {
+    this.getNotes().then(notes => {
+      this.notes = notes;
+      console.log(notes);
+    });
+  }
+
   notes: Note[] = [
     {text: "Note one"},
     {text: "Note two"}
   ]
+
+  getNotes(): Promise<Note[]> {
+    return this.http.get(this.notesUrl)
+      .toPromise()
+      .then(response => response.json() as Note[]);
+  }
 
   add(notetext: string) {
     if (!notetext) return;  // do not add note if input is empty
