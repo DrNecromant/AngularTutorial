@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -11,8 +11,8 @@ interface Note {
     selector: 'notes',
     template: `
       <ul>
-        <li *ngFor="let note of notes; let i=index">
-          {{note.text}} <button (click)="remove(i)">remove</button>
+        <li *ngFor="let note of notes">
+          {{note.text}} <button (click)="remove(note._id)">remove</button>
         </li>
       </ul>
       <textarea #notetext></textarea>
@@ -41,8 +41,14 @@ export class NotesComponent {
     this.addNote(note);
   }
 
-  remove(idx) {
-    this.notes.splice(idx, 1);
+  remove(id:string) {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('id', id);
+    this.http.delete(this.notesUrl, { search: params })
+      .toPromise()
+      .then(response => {
+        this.readNotes();
+      });
   }
 
   getNotes(): Promise<Note[]> {

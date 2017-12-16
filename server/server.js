@@ -5,6 +5,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
+var ObjectID = require('mongodb').ObjectID;
 
 var db = new Db(
   'tutor',
@@ -35,6 +36,18 @@ app.post("/notes", function(req,res) {
   db.notes.insert(req.body).then(function() {
     res.end();
   });
+});
+
+app.delete("/notes", function(req,res) {
+	var id = new ObjectID(req.query.id);
+	db.notes.remove({_id: id}, function(err) {
+		if (err) {
+			console.log(err);
+			res.send("Failed");
+		} else {
+			res.send("Success");
+		}
+	})
 });
 
 app.listen(8080);
