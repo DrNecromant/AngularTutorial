@@ -21,7 +21,7 @@ interface Note {
 })
 
 export class NotesComponent {
-  private notesUrl = 'http://localhost:8080/notes';
+  private notesUrl = 'notes';
 
   constructor(private http: Http) {
     this.getNotes().then(notes => {

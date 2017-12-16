@@ -2,9 +2,9 @@ var express = require('express');
 var app = express();
 var path = require('path');
 
+app.use(express.static(path.join(__dirname, '..')));  // define static dir
+
 app.get("/notes", function(req,res) {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
    var notes = [
        {text: "First note"},
        {text: "Second note"},
