@@ -9,15 +9,7 @@ interface Note {
 
 @Component({
     selector: 'notes',
-    template: `
-      <ul>
-        <li *ngFor="let note of notes">
-          {{note.text}} <button (click)="remove(note._id)">remove</button>
-        </li>
-      </ul>
-      <textarea #notetext></textarea>
-      <button (click)="add(notetext.value); notetext.value=null">Add</button>
-    `
+    templateUrl: 'app/notes.component.html',
 })
 
 export class NotesComponent {
