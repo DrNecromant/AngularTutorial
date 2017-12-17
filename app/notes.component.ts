@@ -16,7 +16,7 @@ export class NotesComponent implements OnChanges {
 
   constructor(private http: Http) { }
 
-  @Input() section: string = 'Work';
+  @Input() section: string;
 
   ngOnChanges() {
     this.readNotes();
