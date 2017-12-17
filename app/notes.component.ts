@@ -1,14 +1,10 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
-interface Note {
-  _id?: string;
-  text: string;
-}
+import { Note } from './interfaces'
 
 @Component({
   selector: 'notes',
