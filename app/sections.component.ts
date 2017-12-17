@@ -1,8 +1,16 @@
 import { Component } from '@angular/core';
 
+interface Section {
+    _id: string;
+    title: string;
+}
+
 @Component({
     selector: 'sections',
-    template: `<div>Sections</div>`,
+    templateUrl: 'app/sections.component.html',
 })
 
-export class SectionsComponent { }
+export class SectionsComponent {
+  private sectionsUrl = 'sections';
+  sections: Section[];
+}
