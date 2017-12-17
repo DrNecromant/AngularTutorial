@@ -31,18 +31,14 @@ export class NotesComponent implements OnChanges {
   add(notetext: string) {
     if (!notetext) return;  // do not add note if input is empty
     let note = { text: notetext, section: this.section };
-    this.notes.push(note);
-    this.addNote(note);
+    this.addNote(note).subscribe(response => this.readNotes());
   }
 
   remove(id:string) {
     let params: URLSearchParams = new URLSearchParams();
     params.set('id', id);
     this.http.delete(this.notesUrl, { search: params })
-      .toPromise()
-      .then(response => {
-        this.readNotes();
-      });
+      .subscribe(response => this.readNotes());
   }
 
   getNotes(): Observable<Note[]> {
@@ -52,7 +48,7 @@ export class NotesComponent implements OnChanges {
       .map(response => response.json() as Note[]);
   }
 
-  addNote(note:Note) {
-    this.http.post(this.notesUrl, note).subscribe();
+  addNote(note:Note): Observable<any> {
+    return this.http.post(this.notesUrl, note);
   }
 }
