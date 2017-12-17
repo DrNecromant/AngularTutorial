@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
 interface Note {
   _id?: string;
@@ -16,20 +18,21 @@ interface Note {
 export class NotesComponent {
   private notesUrl = 'notes';
   notes: Note[];
+  section: string = 'Work';
 
   constructor(private http: Http) {
     this.readNotes();
   }
 
   readNotes() {
-    this.getNotes().then(notes=>{
+    this.getNotes().subscribe(notes => {
       this.notes = notes;
     });
   }
 
   add(notetext: string) {
     if (!notetext) return;  // do not add note if input is empty
-    let note = { text: notetext };
+    let note = { text: notetext, section: this.section };
     this.notes.push(note);
     this.addNote(note);
   }
@@ -44,10 +47,11 @@ export class NotesComponent {
       });
   }
 
-  getNotes(): Promise<Note[]> {
-    return this.http.get(this.notesUrl)
-      .toPromise()
-      .then(response => response.json() as Note[]);
+  getNotes(): Observable<Note[]> {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('section', this.section);
+    return this.http.get(this.notesUrl, {search: params})
+      .map(response => response.json() as Note[]);
   }
 
   addNote(note:Note) {
