@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
@@ -15,12 +15,15 @@ interface Note {
   templateUrl: 'app/notes.component.html',
 })
 
-export class NotesComponent {
+export class NotesComponent implements OnChanges {
   private notesUrl = 'notes';
   notes: Note[];
-  section: string = 'Work';
 
-  constructor(private http: Http) {
+  constructor(private http: Http) { }
+
+  @Input() section: string = 'Work';
+
+  ngOnChanges() {
     this.readNotes();
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
@@ -23,6 +23,8 @@ export class SectionsComponent {
     this.readSections();
   }
 
+  @Output() sectionChanged: EventEmitter<string> = new EventEmitter<string>();
+
   readSections() {
     this.getSections().subscribe(sections=> {
       this.sections = sections;
@@ -39,5 +41,6 @@ export class SectionsComponent {
 
   showSection(section:Section) {
     this.activeSection = section.title;
+    this.sectionChanged.emit(this.activeSection); 
   }
 }

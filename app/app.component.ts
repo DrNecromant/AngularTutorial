@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
     templateUrl: 'app/app.component.html',
 })
 
-export class AppComponent { }
+export class AppComponent {
+  section: string;
+
+  setSection(section:string) {
+    this.section = section;
+  }
+}
