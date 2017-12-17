@@ -11,6 +11,8 @@ import { NotesEditorComponent } from './notesEditor.component';
 import { ViewSectionComponent } from './viewSection.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 
+import { NotesService } from './services/api/notes.service';
+
 const appRoutes: Routes = [
   { path: '', component: NotesEditorComponent },
   { path: 'section/:name', component: ViewSectionComponent },
@@ -31,6 +33,9 @@ const appRoutes: Routes = [
     SectionsComponent,
     ViewSectionComponent,
     PageNotFoundComponent,
+  ],
+  providers: [
+    NotesService,
   ],
   bootstrap: [ AppComponent ]
 })
