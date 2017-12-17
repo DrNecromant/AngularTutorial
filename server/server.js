@@ -11,9 +11,10 @@ var ObjectID = require('mongodb').ObjectID;
 // =================
 
 var app = express();
+var root = path.join(__dirname, '..');
 
 app.use([
-  express.static(path.join(__dirname, '..')),
+  express.static(root),
   bodyParser.urlencoded({extended: true}),
   bodyParser.json()
 ]);
@@ -80,5 +81,17 @@ app.post("/sections", function(req, res) {
     res.end();
   });
 });
+
+// ==========
+// All others
+// ==========
+
+app.get("*", function(req, res, next) {
+  res.sendFile('index.html', { root : root });
+});
+
+// =========
+// Start app
+// =========
 
 app.listen(8080);
