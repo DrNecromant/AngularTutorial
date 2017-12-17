@@ -18,6 +18,9 @@ db.open(function(err) {
   db.collection('notes', function(error, notes) {
 	   db.notes = notes;
 	});
+  db.collection('sections', function(error, sections) {
+		db.sections = sections;
+	});
 });
 
 app.use([
@@ -44,6 +47,12 @@ app.delete("/notes", function(req, res) {
 		if (err) console.log(err);
 		else res.end();
 	})
+});
+
+app.get("/sections", function(req,res) {
+	db.sections.find(req.query).toArray(function(err, items) {
+		res.send(items);
+	});
 });
 
 app.listen(8080);
