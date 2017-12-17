@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
 import { Note } from './interfaces'
@@ -54,8 +53,6 @@ export class NotesComponent implements OnChanges {
   }
 
   addNote(note:Note) {
-    this.http.post(this.notesUrl, note)
-      .toPromise()
-      .then(response => console.log("note sent, response", response));
+    this.http.post(this.notesUrl, note).subscribe();
   }
 }
