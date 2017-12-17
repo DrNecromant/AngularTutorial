@@ -3,6 +3,7 @@ import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { NotesService } from './services/api/notes.service';
 import { Note } from './interfaces'
 
 @Component({
@@ -14,7 +15,7 @@ export class NotesComponent implements OnChanges {
   private notesUrl = 'notes';
   notes: Note[];
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private notesService: NotesService) { }
 
   @Input() section: string;
 
@@ -23,33 +24,16 @@ export class NotesComponent implements OnChanges {
   }
 
   read() {
-    this.getNotes().subscribe(notes => { this.notes = notes });
+    this.notesService.getNotes(this.section).subscribe(notes => { this.notes = notes });
   }
 
   add(notetext: string) {
     if (!notetext) return;  // do not add note if input is empty
     let note = { text: notetext, section: this.section };
-    this.addNote(note).subscribe(response => this.read());
+    this.notesService.addNote(note).subscribe(response => this.read());
   }
 
   remove(id:string) {
-    this.removeNote(id).subscribe(response => this.read());
-  }
-
-  getNotes(): Observable<Note[]> {
-    let params: URLSearchParams = new URLSearchParams();
-    params.set('section', this.section);
-    return this.http.get(this.notesUrl, {search: params})
-      .map(response => response.json() as Note[]);
-  }
-
-  addNote(note: Note): Observable<any> {
-    return this.http.post(this.notesUrl, note);
-  }
-
-  removeNote(id: string): Observable<any> {
-    let params: URLSearchParams = new URLSearchParams();
-    params.set('id', id);
-    return this.http.delete(this.notesUrl, { search: params })
+    this.notesService.removeNote(id).subscribe(response => this.read());
   }
 }
