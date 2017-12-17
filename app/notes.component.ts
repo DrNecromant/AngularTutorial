@@ -19,26 +19,21 @@ export class NotesComponent implements OnChanges {
   @Input() section: string;
 
   ngOnChanges() {
-    this.readNotes();
+    this.read();
   }
 
-  readNotes() {
-    this.getNotes().subscribe(notes => {
-      this.notes = notes;
-    });
+  read() {
+    this.getNotes().subscribe(notes => { this.notes = notes });
   }
 
   add(notetext: string) {
     if (!notetext) return;  // do not add note if input is empty
     let note = { text: notetext, section: this.section };
-    this.addNote(note).subscribe(response => this.readNotes());
+    this.addNote(note).subscribe(response => this.read());
   }
 
   remove(id:string) {
-    let params: URLSearchParams = new URLSearchParams();
-    params.set('id', id);
-    this.http.delete(this.notesUrl, { search: params })
-      .subscribe(response => this.readNotes());
+    this.removeNote(id).subscribe(response => this.read());
   }
 
   getNotes(): Observable<Note[]> {
@@ -48,7 +43,13 @@ export class NotesComponent implements OnChanges {
       .map(response => response.json() as Note[]);
   }
 
-  addNote(note:Note): Observable<any> {
+  addNote(note: Note): Observable<any> {
     return this.http.post(this.notesUrl, note);
+  }
+
+  removeNote(id: string): Observable<any> {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('id', id);
+    return this.http.delete(this.notesUrl, { search: params })
   }
 }
