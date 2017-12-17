@@ -18,6 +18,7 @@ export class SectionsComponent {
   private sectionsUrl = 'sections';
   sections: Section[];
   activeSection: string;
+  sectionsReplaceUrl = "/sections/replace";
 
   constructor(private http: Http) {
     this.readSections();
@@ -41,6 +42,20 @@ export class SectionsComponent {
 
   showSection(section:Section) {
     this.activeSection = section.title;
-    this.sectionChanged.emit(this.activeSection); 
+    this.sectionChanged.emit(this.activeSection);
+  }
+
+  addSection(sectiontext) {
+    if (!sectiontext) return;
+    if (this.sections.find(section => section.title===sectiontext)) return;
+
+    const section: Section = { title: sectiontext };
+    this.sections.push(section);
+    this.showSection(section);
+    this.writeSections();
+  }
+
+  writeSections() {
+    this.http.post(this.sectionsReplaceUrl, this.sections).subscribe();
   }
 }

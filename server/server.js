@@ -1,11 +1,26 @@
 var express = require('express');
-var app = express();
 var path = require('path');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 var ObjectID = require('mongodb').ObjectID;
+
+// =================
+// App and midleware
+// =================
+
+var app = express();
+
+app.use([
+  express.static(path.join(__dirname, '..')),
+  bodyParser.urlencoded({extended: true}),
+  bodyParser.json()
+]);
+
+// ========
+// Database
+// ========
 
 var db = new Db(
   'tutor',
@@ -23,11 +38,9 @@ db.open(function(err) {
 	});
 });
 
-app.use([
-  express.static(path.join(__dirname, '..')),
-  bodyParser.urlencoded({extended: true}),
-  bodyParser.json()
-]);
+// =====
+// Notes
+// =====
 
 app.get("/notes", function(req, res) {
 	db.notes.find(req.query).toArray(function(err, items) {
@@ -49,10 +62,29 @@ app.delete("/notes", function(req, res) {
 	})
 });
 
-app.get("/sections", function(req,res) {
+// ========
+// Sections
+// ========
+
+app.get("/sections", function(req, res) {
 	db.sections.find(req.query).toArray(function(err, items) {
 		res.send(items);
 	});
 });
+
+app.post("/sections/replace", function(req, resp) {
+	console.log("Replace");
+	if (req.body.length==0) {
+		resp.end();
+	}
+	db.sections.remove({}, function(err, res) {
+		if (err) console.log(err);
+		db.sections.insert(req.body, function(err, res) {
+			if (err) console.log("err after insert", err);
+			resp.end();
+		});
+	});
+});
+
 
 app.listen(8080);
