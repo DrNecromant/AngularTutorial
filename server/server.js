@@ -73,8 +73,7 @@ app.get("/sections", function(req, res) {
 });
 
 app.post("/sections/replace", function(req, resp) {
-	console.log("Replace");
-	if (req.body.length==0) {
+	if (req.body.length == 0) {
 		resp.end();
 	}
 	db.sections.remove({}, function(err, res) {
@@ -85,6 +84,5 @@ app.post("/sections/replace", function(req, resp) {
 		});
 	});
 });
-
 
 app.listen(8080);
