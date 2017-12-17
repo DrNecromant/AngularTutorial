@@ -7,6 +7,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NotesComponent } from './notes.component';
 import { SectionsComponent } from './sections.component';
+import { NotesEditorComponent } from './notesEditor.component';
+import { PageNotFoundComponent } from './pageNotFound.component';
 
 const appRoutes: Routes = [
   { path: '', component: NotesEditorComponent },
@@ -23,7 +25,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NotesComponent,
+    NotesEditorComponent,
     SectionsComponent,
+    PageNotFoundComponent,
   ],
   bootstrap: [ AppComponent ]
 })
