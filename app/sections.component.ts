@@ -14,21 +14,33 @@ export class SectionsComponent {
   private sectionsUrl = 'sections';
   sections: Section[];
   activeSection: string;
-  sectionsReplaceUrl = "/sections/replace";
+  sectionsReplaceUrl = "/sections";
 
   constructor(private http: Http) {
-    this.readSections();
+    this.read();
   }
 
   @Output() sectionChanged: EventEmitter<string> = new EventEmitter<string>();
 
-  readSections() {
+  read() {
     this.getSections().subscribe(sections=> {
       this.sections = sections;
       if (this.activeSection == null && this.sections.length > 0) {
-        this.showSection(this.sections[0]);
+        this.show(this.sections[0]);
       }
     });
+  }
+
+  show(section: Section) {
+    this.activeSection = section.title;
+    this.sectionChanged.emit(this.activeSection);
+  }
+
+  add(sectiontext) {
+    if (!sectiontext) return;
+    if (this.sections.find(section => section.title === sectiontext)) return;
+    let section = { title: sectiontext };
+    this.addSection(section).subscribe(response => this.read());
   }
 
   getSections(): Observable<Section[]> {
@@ -36,22 +48,7 @@ export class SectionsComponent {
       .map(response => response.json() as Section[]);
   }
 
-  showSection(section:Section) {
-    this.activeSection = section.title;
-    this.sectionChanged.emit(this.activeSection);
-  }
-
-  addSection(sectiontext) {
-    if (!sectiontext) return;
-    if (this.sections.find(section => section.title===sectiontext)) return;
-
-    const section: Section = { title: sectiontext };
-    this.sections.push(section);
-    this.showSection(section);
-    this.writeSections();
-  }
-
-  writeSections() {
-    this.http.post(this.sectionsReplaceUrl, this.sections).subscribe();
+  addSection(section: Section): Observable<any> {
+    return this.http.post(this.sectionsReplaceUrl, section);
   }
 }

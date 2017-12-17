@@ -59,7 +59,7 @@ app.delete("/notes", function(req, res) {
 	db.notes.remove({_id: id}, function(err) {
 		if (err) console.log(err);
 		else res.end();
-	})
+	});
 });
 
 // ========
@@ -72,17 +72,13 @@ app.get("/sections", function(req, res) {
 	});
 });
 
-app.post("/sections/replace", function(req, resp) {
+app.post("/sections", function(req, res) {
 	if (req.body.length == 0) {
-		resp.end();
-	}
-	db.sections.remove({}, function(err, res) {
-		if (err) console.log(err);
-		db.sections.insert(req.body, function(err, res) {
-			if (err) console.log("err after insert", err);
-			resp.end();
-		});
-	});
+    res.end();
+  }
+	db.sections.insert(req.body).then(function() {
+    res.end();
+  });
 });
 
 app.listen(8080);

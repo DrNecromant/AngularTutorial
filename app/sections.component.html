@@ -1,14 +1,14 @@
 <div class="input-group" style="padding-bottom:20px">
   <input type="text" class="form-control" #sectiontext>
   <span class="input-group-btn">
-    <button class="btn btn-default" type="button" (click)="addSection(sectiontext.value); sectiontext.value=null">Add</button>
+    <button class="btn btn-default" type="button" (click)="add(sectiontext.value); sectiontext.value=null">Add</button>
   </span>
 </div>
 
 <ul class="list-group">
   <li *ngFor="let section of sections"
     [ngClass]="{active:section.title==activeSection}"
-    (click)="showSection(section)" class="list-group-item">
+    (click)="show(section)" class="list-group-item">
     {{section.title}}
   </li>
 </ul>
