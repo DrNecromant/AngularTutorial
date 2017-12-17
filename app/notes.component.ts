@@ -4,12 +4,13 @@ import { Http, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 interface Note {
-    text: string;
+  _id?: string;
+  text: string;
 }
 
 @Component({
-    selector: 'notes',
-    templateUrl: 'app/notes.component.html',
+  selector: 'notes',
+  templateUrl: 'app/notes.component.html',
 })
 
 export class NotesComponent {
