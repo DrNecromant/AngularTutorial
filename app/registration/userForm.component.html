@@ -18,7 +18,11 @@
       <div class="form-group">
         <label for="password2">Password again</label>
         <input type="password" class="form-control" id="password2" required
-          name="password2" #password2="ngModel" [(ngModel)]="user.password2">
+          name="password2" #password2="ngModel" [(ngModel)]="user.password2"
+          validateEqual="password">
+        <span *ngIf="password2.errors && !password2.errors.validateEqual && password2.touched">
+          Passwords should match
+        </span>
       </div>
 
       <div class="form-group">

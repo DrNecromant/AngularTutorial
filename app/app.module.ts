@@ -14,6 +14,8 @@ import { PageNotFoundComponent } from './pageNotFound.component';
 
 import { NotesService } from './services/api/notes.service';
 
+import { EqualToValidator } from './directives/EqualToValidator';
+
 const appRoutes: Routes = [
   { path: '', component: NotesEditorComponent },
   { path: 'register', component: UserFormComponent },
@@ -37,6 +39,7 @@ const appRoutes: Routes = [
     ViewSectionComponent,
     UserFormComponent,
     PageNotFoundComponent,
+    EqualToValidator,
   ],
   providers: [
     NotesService,
