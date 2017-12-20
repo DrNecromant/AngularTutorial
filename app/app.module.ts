@@ -16,6 +16,7 @@ import { NotesService } from './services/api/notes.service';
 const appRoutes: Routes = [
   { path: '', component: NotesEditorComponent },
   { path: 'section/:name', component: ViewSectionComponent },
+  { path: ':name', component: NotesEditorComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

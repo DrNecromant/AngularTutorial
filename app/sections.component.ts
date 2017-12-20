@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -21,6 +21,13 @@ export class SectionsComponent {
   }
 
   @Output() sectionChanged: EventEmitter<string> = new EventEmitter<string>();
+  @Input()
+  set section(section:string) {
+    if (section && section.length > 0) {
+        this.activeSection = section;
+    }
+}
+
 
   read() {
     this.getSections().subscribe(sections=> {
