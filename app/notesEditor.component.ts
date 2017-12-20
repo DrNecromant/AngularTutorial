@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'notes-editor',
     templateUrl: 'app/notesEditor.component.html',
 })
 

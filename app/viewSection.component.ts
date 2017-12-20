@@ -5,7 +5,6 @@ import { NotesService } from './services/api/notes.service';
 import { Note } from './interfaces'
 
 @Component({
-    selector: 'view-section',
     templateUrl: 'app/viewSection.component.html',
 })
 
