@@ -1,0 +1,50 @@
+<div class="col-md-4 col-md-offset-4">
+  <div class="panel panel-primary">
+  <div class="panel-heading">User registration form</div>
+  <div class="panel-body">
+    <form class="css-form" name="userForm" #userForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="userName">User name</label>
+        <input type="text" class="form-control" id="userName"
+          name="userName" #name="ngModel" [(ngModel)]="user.name">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password"
+          name="password" #password="ngModel" [(ngModel)]="user.password">
+      </div>
+
+      <div class="form-group">
+        <label for="password2">Password again</label>
+        <input type="password" class="form-control" id="password2"
+          name="password2" #password2="ngModel" [(ngModel)]="user.password2">
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <input type="text" class="form-control" id="dateOfBirth"
+          name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="user.dateOfBirth">
+      </div>
+
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="subscribe" [(ngModel)]="user.subscribe">
+            Subscribe for newsletters
+          </label>
+        </div>
+      </div>
+
+      <div *ngIf="user.subscribe" class="form-group">
+        <label for="email">E-mail</label>
+        <input type="text" class="form-control" id="email"
+          name="email" #email="ngModel" [(ngModel)]="user.email">
+      </div>
+
+      <button type="submit" class="btn btn-primary pull-right"> Submit</button>
+
+    </form>
+  </div>
+  </div>
+</div>

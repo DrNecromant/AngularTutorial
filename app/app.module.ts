@@ -9,12 +9,14 @@ import { NotesComponent } from './notes.component';
 import { SectionsComponent } from './sections.component';
 import { NotesEditorComponent } from './notesEditor.component';
 import { ViewSectionComponent } from './viewSection.component';
+import { UserFormComponent } from './registration/userForm.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 
 import { NotesService } from './services/api/notes.service';
 
 const appRoutes: Routes = [
   { path: '', component: NotesEditorComponent },
+  { path: 'register', component: UserFormComponent },
   { path: 'section/:name', component: ViewSectionComponent },
   { path: ':name', component: NotesEditorComponent },
   { path: '**', component: PageNotFoundComponent },
@@ -33,6 +35,7 @@ const appRoutes: Routes = [
     NotesEditorComponent,
     SectionsComponent,
     ViewSectionComponent,
+    UserFormComponent,
     PageNotFoundComponent,
   ],
   providers: [
