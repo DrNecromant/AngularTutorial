@@ -5,26 +5,30 @@
     <form class="css-form" name="userForm" #userForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="userName">User name</label>
-        <input type="text" class="form-control" id="userName"
+        <input type="text" class="form-control" id="userName" required
           name="userName" #name="ngModel" [(ngModel)]="user.name">
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password"
+        <input type="password" class="form-control" id="password" required
           name="password" #password="ngModel" [(ngModel)]="user.password">
       </div>
 
       <div class="form-group">
         <label for="password2">Password again</label>
-        <input type="password" class="form-control" id="password2"
+        <input type="password" class="form-control" id="password2" required
           name="password2" #password2="ngModel" [(ngModel)]="user.password2">
       </div>
 
       <div class="form-group">
         <label for="dateOfBirth">Date of birth</label>
-        <input type="text" class="form-control" id="dateOfBirth"
-          name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="user.dateOfBirth">
+        <input type="text" class="form-control" id="dateOfBirth" required
+          name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="user.dateOfBirth"
+          pattern="[0-9][0-9]\.[0-1][0-9]\.[1-2][0-9][0-9][0-9]">
+        <span *ngIf="dateOfBirth.errors && dateOfBirth.errors.pattern && dateOfBirth.touched">
+          Date of birth should be in format dd.mm.yyyy
+        </span>
       </div>
 
       <div class="form-group">
@@ -39,10 +43,16 @@
       <div *ngIf="user.subscribe" class="form-group">
         <label for="email">E-mail</label>
         <input type="text" class="form-control" id="email"
-          name="email" #email="ngModel" [(ngModel)]="user.email">
+          name="email" #email="ngModel" [(ngModel)]="user.email"
+          pattern="[a-z]+@[a-z]+\.[a-z]+">
+        <span *ngIf="email.errors && email.errors.pattern && email.touched">
+          Email should be in format name@mail.domain
+        </span>
       </div>
 
-      <button type="submit" class="btn btn-primary pull-right"> Submit</button>
+      <button [disabled]="!userForm.valid" type="submit" class="btn btn-primary pull-right">
+        Submit
+      </button>
 
     </form>
   </div>
