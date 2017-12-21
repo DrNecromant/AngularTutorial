@@ -1,5 +1,5 @@
 import { Directive, Attribute } from '@angular/core';
-import { NG_VALIDATORS, AbstractControl } from '@angular/forms';
+import { Validator, NG_VALIDATORS, AbstractControl } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
 @Directive({
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
   }]
 })
 
-export class EqualToValidator {
+export class EqualToValidator implements Validator {
   subscription: Subscription;
 
   constructor( @Attribute("validateEqual") public validateEqual: string) { }
