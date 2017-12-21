@@ -14,6 +14,11 @@ var app = express();
 var root = path.join(__dirname, '..');
 
 app.use([
+  session({
+    secret: 'angular_tutorial',
+    resave: true,
+    saveUninitialized: true
+  }),
   express.static(root),
   bodyParser.urlencoded({extended: true}),
   bodyParser.json()
@@ -36,6 +41,9 @@ db.open(function(err) {
 	});
   db.collection('sections', function(error, sections) {
 		db.sections = sections;
+	});
+  db.collection('users', function(error, users) {
+			db.users = users;
 	});
 });
 
@@ -82,12 +90,23 @@ app.post("/sections", function(req, res) {
   });
 });
 
+// =====
+// Users
+// =====
+
+app.post("/users", function(req, res) {
+  db.users.insert(req.body, function() {
+    console.log(req.body);
+    req.session.userName = req.body.name;
+    res.end();
+  });
+});
+
 // ==========
 // Validation
 // ==========
 
 app.get("/checkUserUnique", function(req, res) {
-  console.log('dddddddddddddddddd');
 	res.send(req.query.user.length > 2);
 });
 
