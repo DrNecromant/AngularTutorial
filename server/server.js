@@ -83,6 +83,15 @@ app.post("/sections", function(req, res) {
 });
 
 // ==========
+// Validation
+// ==========
+
+app.get("/checkUserUnique", function(req, res) {
+  console.log('dddddddddddddddddd');
+	res.send(req.query.user.length > 2);
+});
+
+// ==========
 // All others
 // ==========
 

@@ -6,7 +6,10 @@
       <div class="form-group">
         <label for="userName">User name</label>
         <input type="text" class="form-control" id="userName" required
-          name="userName" #name="ngModel" [(ngModel)]="user.name">
+          name="userName" userUniqueValid #name="ngModel" [(ngModel)]="user.name">
+        <span *ngIf="name.errors && name.value?.length > 0 && !name.errors.userUniqueValid && name.dirty">
+          User name is not unique. Please select another one.
+        </span>
       </div>
 
       <div class="form-group">
