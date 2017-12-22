@@ -16,3 +16,8 @@ export class User {
   email: string;
   dateOfBirth: string;
 }
+
+export class LoginUser {
+    userName: string;
+    password: string;
+}
