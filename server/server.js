@@ -96,7 +96,6 @@ app.post("/sections", function(req, res) {
 
 app.post("/users", function(req, res) {
   db.users.insert(req.body, function() {
-    console.log(req.body);
     req.session.userName = req.body.name;
     res.end();
   });
