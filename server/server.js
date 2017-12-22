@@ -52,12 +52,14 @@ db.open(function(err) {
 // =====
 
 app.get("/notes", function(req, res) {
+  req.query.userName = req.session.userName || "demo";
 	db.notes.find(req.query).toArray(function(err, items) {
 		res.send(items);
 	});
 });
 
 app.post("/notes", function(req, res) {
+  req.body.userName = req.session.userName || "demo";
   db.notes.insert(req.body).then(function() {
     res.end();
   });
@@ -76,18 +78,20 @@ app.delete("/notes", function(req, res) {
 // ========
 
 app.get("/sections", function(req, res) {
-	db.sections.find(req.query).toArray(function(err, items) {
-		res.send(items);
-	});
+  var userName = req.session.userName || "demo";
+	db.users.find({ name: userName })
+    .toArray(function(err, items) {
+		    var user = items[0];
+    		res.send(user.sections || []);
+	   });
 });
 
 app.post("/sections", function(req, res) {
-	if (req.body.length == 0) {
-    res.end();
-  }
-	db.sections.insert(req.body).then(function() {
-    res.end();
-  });
+	if (req.body.length == 0) { res.end() }
+  var userName = req.session.userName || "demo";
+	db.users.update({ name: userName }, { $push: { sections: req.body }}, function() {
+		res.end();
+	});
 });
 
 // =====
