@@ -123,7 +123,7 @@ app.post("/users", function(req, res) {
 });
 
 app.get("/user", function(req, res) {
-  res.send({ userName: req.session.userName })
+  res.send(req.session.userName? { userName: req.session.userName }:null)
 });
 
 // ==========
