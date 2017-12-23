@@ -1,10 +1,16 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <div class="navbar-brand">Angular Tutorial</div>
+      <div class="navbar-brand" routerLink="/" style="cursor:hand">
+        Angular Tutorial
+      </div>
     </div>
     <div class="navbar-form navbar-right">
-      <a class="btn btn-primary" routerLink="/register">Register</a>
+      <div class="navbar-form navbar-right">
+        <login-form>
+          <a class="btn btn-primary" routerLink="/register">Register</a>
+        </login-form>
+      </div>
     </div>
   </div>
 </nav>

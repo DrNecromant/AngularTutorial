@@ -10,9 +10,11 @@ import { SectionsComponent } from './sections.component';
 import { NotesEditorComponent } from './notesEditor.component';
 import { ViewSectionComponent } from './viewSection.component';
 import { UserFormComponent } from './forms/userForm.component';
+import { LoginFormComponent } from './forms/loginForm.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 
 import { NotesService } from './services/api/notes.service';
+import { LoginService } from './services/api/login.service';
 
 import { EqualToValidator } from './directives/EqualToValidator';
 import { UserUniqueValidator } from './directives/UserUniqueValidator';
@@ -39,12 +41,14 @@ const appRoutes: Routes = [
     SectionsComponent,
     ViewSectionComponent,
     UserFormComponent,
+    LoginFormComponent,
     PageNotFoundComponent,
     EqualToValidator,
     UserUniqueValidator,
   ],
   providers: [
     NotesService,
+    LoginService,
   ],
   bootstrap: [ AppComponent ]
 })
