@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginService } from '../services/api/login.service'
@@ -10,11 +10,17 @@ import { LoginUser } from '../interfaces'
   templateUrl: 'app/forms/loginForm.component.html'
 })
 
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
   userForm: LoginUser = new LoginUser();
   failedLogin: boolean;
 
   constructor(private loginService: LoginService, private router: Router) { }
+
+  ngOnInit() {
+    console.log('Form INIT');
+    this.loginService.getUser()
+      .subscribe(res => { this.userForm = res })
+  }
 
   login() {
     this.loginService.login(this.userForm)
