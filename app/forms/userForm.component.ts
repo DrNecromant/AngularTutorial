@@ -19,7 +19,6 @@ export class UserFormComponent {
   constructor(private http: Http, private router: Router) { }
 
   onSubmit() {
-    console.log(this.user);
     this.http.post('users', this.user).subscribe(res => {
       this.router.navigateByUrl('');
     });
