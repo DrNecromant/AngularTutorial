@@ -47,6 +47,23 @@ db.open(function(err) {
 	});
 });
 
+// =============
+// Authorization
+// =============
+
+app.post("/login", function(req,res) {
+  db.users.find({ name: req.body.userName, password: req.body.password })
+    .toArray(function(err, items) {
+      if (items.length > 0) { req.session.userName = req.body.userName }
+      res.send(items.length > 0);
+    });
+});
+
+app.get("/logout", function(req, res) {
+  req.session.userName = null;
+  res.end();
+});
+
 // =====
 // Notes
 // =====
