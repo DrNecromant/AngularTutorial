@@ -19,5 +19,5 @@ export class User {
 
 export class LoginUser {
     userName: string;
-    password: string;
+    password?: string;
 }
