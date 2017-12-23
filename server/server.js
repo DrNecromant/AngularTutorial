@@ -122,6 +122,10 @@ app.post("/users", function(req, res) {
   });
 });
 
+app.get("/user", function(req, res) {
+  res.send(req.session.userName);
+});
+
 // ==========
 // Validation
 // ==========
