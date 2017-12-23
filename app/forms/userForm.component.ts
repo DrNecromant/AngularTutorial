@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { User } from '../interfaces';
 
 @Component({
-  templateUrl: 'app/registration/userForm.component.html',
+  templateUrl: 'app/forms/userForm.component.html',
   styles: [`
     input.ng-touched.ng-invalid {
       background-color: #ffe8f1;

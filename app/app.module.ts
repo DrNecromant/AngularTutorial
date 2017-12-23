@@ -9,7 +9,7 @@ import { NotesComponent } from './notes.component';
 import { SectionsComponent } from './sections.component';
 import { NotesEditorComponent } from './notesEditor.component';
 import { ViewSectionComponent } from './viewSection.component';
-import { UserFormComponent } from './registration/userForm.component';
+import { UserFormComponent } from './forms/userForm.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 
 import { NotesService } from './services/api/notes.service';
