@@ -10,6 +10,7 @@ import { LoginUser } from '../../interfaces'
 export class LoginService {
   private loginUrl = 'login';
   private logoutUrl = 'logout';
+  private userUrl = 'user';
   loggedIn: boolean = false;
 
   constructor(private http: Http) { }
@@ -24,4 +25,10 @@ export class LoginService {
     return this.http.get(this.logoutUrl)
       .do(res => this.loggedIn = false);
   }
+
+  getUser() {
+    return this.http.get(this.userUrl)
+      .map(response => response.json() as LoginUser)
+      .do(res => this.loggedIn = true);
+   }
 }
