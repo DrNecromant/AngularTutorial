@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { NotesService } from './services/api/note.service';
-import { Note } from './interfaces'
+import { NotesService } from '../../services/api/note.service';
+import { Note } from '../../interfaces'
 
 @Component({
-    templateUrl: 'app/viewSection.component.html',
+    templateUrl: 'app/views/section/viewSection.component.html',
 })
 
 export class ViewSectionComponent implements OnInit {

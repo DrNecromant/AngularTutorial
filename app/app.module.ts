@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NotesComponent } from './notes.component';
 import { SectionsComponent } from './sections.component';
 import { NotesEditorComponent } from './notesEditor.component';
-import { ViewSectionComponent } from './viewSection.component';
+import { ViewSectionComponent } from './views/section/viewSection.component';
 import { UserFormComponent } from './forms/userForm.component';
 import { LoginFormComponent } from './forms/loginForm.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
