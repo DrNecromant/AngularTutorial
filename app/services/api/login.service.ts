@@ -40,7 +40,7 @@ export class LoginService {
 
   getUser() {
     return this.http.get(this.userUrl)
-      .map(response => response? response.json() as LoginUser:null)
+      .map(res => res.text()? res.json():null)
       .do(res => this.loggedIn = true);
    }
 }

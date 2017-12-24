@@ -14,7 +14,7 @@ export class NotesService {
   getNotes(section): Observable<Note[]> {
     let params: URLSearchParams = new URLSearchParams();
     params.set('section', section);
-    return this.http.get(this.notesUrl, {search: params})
+    return this.http.get(this.notesUrl, { search: params })
       .map(response => response.json() as Note[]);
   }
 
