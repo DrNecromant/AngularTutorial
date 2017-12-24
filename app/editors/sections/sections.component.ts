@@ -1,13 +1,13 @@
 import { Component, Output, Input, EventEmitter } from '@angular/core';
 
-import { LoginService } from './services/api/login.service'
-import { SectionService } from './services/api/section.service';
+import { LoginService } from '../../services/api/login.service';
+import { SectionService } from '../../services/api/section.service';
 
-import { Section } from './interfaces'
+import { Section } from '../../interfaces';
 
 @Component({
   selector: 'sections',
-  templateUrl: 'app/sections.component.html',
+  templateUrl: 'app/editors/sections/sections.component.html',
 })
 
 export class SectionsComponent {

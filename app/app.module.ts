@@ -5,9 +5,9 @@ import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NotesComponent } from './notes.component';
-import { SectionsComponent } from './sections.component';
-import { NotesEditorComponent } from './notesEditor.component';
+import { NotesComponent } from './editors/notes/notes.component';
+import { SectionsComponent } from './editors/sections/sections.component';
+import { EditorComponent } from './editors/editor.component';
 import { ViewSectionComponent } from './views/section/viewSection.component';
 import { UserFormComponent } from './forms/userForm.component';
 import { LoginFormComponent } from './forms/loginForm.component';
@@ -21,10 +21,10 @@ import { EqualToValidator } from './directives/EqualToValidator';
 import { UserUniqueValidator } from './directives/UserUniqueValidator';
 
 const appRoutes: Routes = [
-  { path: '', component: NotesEditorComponent },
+  { path: '', component: EditorComponent },
   { path: 'register', component: UserFormComponent },
   { path: 'section/:name', component: ViewSectionComponent },
-  { path: ':name', component: NotesEditorComponent },
+  { path: ':name', component: EditorComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
@@ -38,7 +38,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NotesComponent,
-    NotesEditorComponent,
+    EditorComponent,
     SectionsComponent,
     ViewSectionComponent,
     UserFormComponent,

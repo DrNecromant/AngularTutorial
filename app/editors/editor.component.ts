@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-    templateUrl: 'app/notesEditor.component.html',
+    templateUrl: 'app/editors/editor.component.html',
 })
 
-export class NotesEditorComponent {
+export class EditorComponent {
   section: string;
 
   constructor(private route: ActivatedRoute, private router: Router) {
