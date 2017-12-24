@@ -126,12 +126,11 @@ app.get("/user", function(req, res) {
   res.send(req.session.userName? { userName: req.session.userName }:null)
 });
 
-// ==========
-// Validation
-// ==========
-
 app.get("/checkUserUnique", function(req, res) {
-	res.send(req.query.user.length > 2);
+  db.users.find({ name: req.query.user })
+    .toArray(function(err, items) {
+    		res.send(!(items.length > 0));
+	   });
 });
 
 // ==========
