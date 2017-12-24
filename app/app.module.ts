@@ -11,7 +11,7 @@ import { EditorComponent } from './editors/editor.component';
 import { ViewSectionComponent } from './views/section/viewSection.component';
 import { UserFormComponent } from './forms/userForm.component';
 import { LoginFormComponent } from './forms/loginForm.component';
-import { PageNotFoundComponent } from './pageNotFound.component';
+import { PageNotFoundComponent } from './errorPages/pageNotFound/pageNotFound.component';
 
 import { NotesService } from './services/api/note.service';
 import { SectionService } from './services/api/section.service';
