@@ -19,7 +19,8 @@
 
   <ul class="list-group" ng-repeat="note in notes">
     <li *ngFor="let note of notes" class="list-group-item">
-      {{note.text}}
+      {{ note.text }}
+      ({{ note.created | date: 'HH:mm dd.MM.yyyy' }})
       <button class="btn btn-info btn-xs pull-right" (click)="remove(note._id)">remove</button>
     </li>
   </ul>

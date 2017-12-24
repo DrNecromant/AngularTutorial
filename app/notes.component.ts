@@ -14,22 +14,22 @@ import { Note } from './interfaces'
 export class NotesComponent implements OnChanges {
   private notesUrl = 'notes';
   notes: Note[];
+  @Input() section: string;
 
   constructor(private http: Http, private notesService: NotesService) { }
-
-  @Input() section: string;
 
   ngOnChanges() {
     this.read();
   }
 
   read() {
-    this.notesService.getNotes(this.section).subscribe(notes => { this.notes = notes });
+    this.notesService.getNotes(this.section)
+      .subscribe(notes => { this.notes = notes });
   }
 
   add(notetext: string) {
     if (!notetext) return;  // do not add note if input is empty
-    let note = { text: notetext, section: this.section };
+    let note = { text: notetext, section: this.section, created: new Date() };
     this.notesService.addNote(note).subscribe(response => this.read());
   }
 

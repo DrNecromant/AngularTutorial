@@ -1,6 +1,7 @@
 export interface Note {
   _id?: string;
   text: string;
+  created: Date;
 }
 
 export interface Section {
