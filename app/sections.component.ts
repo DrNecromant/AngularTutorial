@@ -3,6 +3,8 @@ import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { LoginService } from './services/api/login.service'
+
 import { Section } from './interfaces'
 
 @Component({
@@ -16,8 +18,9 @@ export class SectionsComponent {
   activeSection: string;
   sectionsReplaceUrl = "/sections";
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private loginService: LoginService) {
     this.read();
+    this.loginService.userLogin$.subscribe(user => this.read())
   }
 
   @Output() sectionChanged: EventEmitter<string> = new EventEmitter<string>();
@@ -26,8 +29,7 @@ export class SectionsComponent {
     if (section && section.length > 0) {
         this.activeSection = section;
     }
-}
-
+  }
 
   read() {
     this.getSections().subscribe(sections=> {
