@@ -14,6 +14,7 @@ import { LoginFormComponent } from './forms/loginForm.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 
 import { NotesService } from './services/api/note.service';
+import { SectionService } from './services/api/section.service';
 import { LoginService } from './services/api/login.service';
 
 import { EqualToValidator } from './directives/EqualToValidator';
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     NotesService,
+    SectionService,
     LoginService,
   ],
   bootstrap: [ AppComponent ]

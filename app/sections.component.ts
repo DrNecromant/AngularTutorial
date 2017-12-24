@@ -1,9 +1,7 @@
 import { Component, Output, Input, EventEmitter } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 
 import { LoginService } from './services/api/login.service'
+import { SectionService } from './services/api/section.service';
 
 import { Section } from './interfaces'
 
@@ -13,26 +11,27 @@ import { Section } from './interfaces'
 })
 
 export class SectionsComponent {
-  private sectionsUrl = 'sections';
   sections: Section[];
   activeSection: string;
-  sectionsReplaceUrl = "/sections";
 
-  constructor(private http: Http, private loginService: LoginService) {
+  constructor(
+    private loginService: LoginService,
+    private sectionService: SectionService,
+  ) {
     this.read();
     this.loginService.userLogin$.subscribe(user => this.read())
   }
 
   @Output() sectionChanged: EventEmitter<string> = new EventEmitter<string>();
   @Input()
-  set section(section:string) {
+  set section(section: string) {
     if (section && section.length > 0) {
         this.activeSection = section;
     }
   }
 
   read() {
-    this.getSections().subscribe(sections=> {
+    this.sectionService.getSections().subscribe(sections=> {
       this.sections = sections;
       if (this.activeSection == null && this.sections.length > 0) {
         this.show(this.sections[0]);
@@ -49,15 +48,6 @@ export class SectionsComponent {
     if (!sectiontext) return;
     if (this.sections.find(section => section.title === sectiontext)) return;
     let section = { title: sectiontext };
-    this.addSection(section).subscribe(response => this.read());
-  }
-
-  getSections(): Observable<Section[]> {
-    return this.http.get(this.sectionsUrl)
-      .map(response => response.json() as Section[]);
-  }
-
-  addSection(section: Section): Observable<any> {
-    return this.http.post(this.sectionsReplaceUrl, section);
+    this.sectionService.addSection(section).subscribe(response => this.read());
   }
 }
