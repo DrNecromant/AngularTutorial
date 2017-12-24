@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
+import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
 import { NotesComponent } from './editors/notes/notes.component';
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
+    DragulaModule,
   ],
   declarations: [
     AppComponent,
