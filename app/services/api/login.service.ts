@@ -41,6 +41,6 @@ export class LoginService {
   getUser() {
     return this.http.get(this.userUrl)
       .map(res => res.text()? res.json():null)
-      .do(res => this.loggedIn = res.text()? true:false);
+      .do(user => this.loggedIn = user? true:false);
    }
 }
