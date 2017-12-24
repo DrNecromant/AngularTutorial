@@ -98,9 +98,9 @@ app.get("/sections", function(req, res) {
   var userName = req.session.userName || "demo";
 	db.users.find({ name: userName })
     .toArray(function(err, items) {
-		    var user = items[0];
-    		res.send(user.sections || []);
-	   });
+      if (items.length == 0) res.send([]);
+      else res.send(items[0].sections || []);
+    });
 });
 
 app.post("/sections", function(req, res) {
