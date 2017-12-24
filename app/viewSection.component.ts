@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { NotesService } from './services/api/notes.service';
+import { NotesService } from './services/api/note.service';
 import { Note } from './interfaces'
 
 @Component({

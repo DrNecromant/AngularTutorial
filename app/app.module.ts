@@ -13,7 +13,7 @@ import { UserFormComponent } from './forms/userForm.component';
 import { LoginFormComponent } from './forms/loginForm.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 
-import { NotesService } from './services/api/notes.service';
+import { NotesService } from './services/api/note.service';
 import { LoginService } from './services/api/login.service';
 
 import { EqualToValidator } from './directives/EqualToValidator';

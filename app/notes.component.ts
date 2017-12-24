@@ -3,7 +3,7 @@ import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { NotesService } from './services/api/notes.service';
+import { NotesService } from './services/api/note.service';
 import { Note } from './interfaces'
 
 @Component({
