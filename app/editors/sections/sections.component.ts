@@ -1,4 +1,5 @@
 import { Component, Output, Input, EventEmitter } from '@angular/core';
+import { DragulaService } from 'ng2-dragula';
 
 import { LoginService } from '../../services/api/login.service';
 import { SectionService } from '../../services/api/section.service';
@@ -17,8 +18,10 @@ export class SectionsComponent {
   constructor(
     private loginService: LoginService,
     private sectionService: SectionService,
+    private dragulaService: DragulaService,
   ) {
     this.read();
+    dragulaService.drop.subscribe(this.onDrop.bind(this));
     this.loginService.userLogin$.subscribe(user => this.read())
   }
 
@@ -49,5 +52,16 @@ export class SectionsComponent {
     if (this.sections.find(section => section.title === sectiontext)) return;
     let section = { title: sectiontext };
     this.sectionService.addSection(section).subscribe(response => this.read());
+  }
+
+  onDrop(value) {
+    let [bag, elementMoved, targetContainer, srcContainer] = value;
+    if (targetContainer.children) {
+      let arr = Array.from(targetContainer.children);
+      this.sections = arr.map((li: HTMLLIElement) => {
+        return { title: li.textContent.trim() }
+      });
+      //this.writeSections().subscribe();
+    }
   }
 }
