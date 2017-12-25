@@ -21,6 +21,6 @@ export class UserAgeValidator implements Validator {
     if (!userYear) return null;  // Ignore empty or invalid year
     let currentYear: number = (new Date()).getFullYear();
     if (currentYear - userYear >= +this.validateAge) return null;  // Check user age is good
-    return { validateAge: false };
+    return { validateAge: true };
   }
 }

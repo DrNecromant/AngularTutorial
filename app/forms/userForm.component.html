@@ -37,8 +37,8 @@
           <span *ngIf="dateOfBirth.errors.pattern">
             Date of birth should be in format dd.mm.yyyy
           </span>
-          <span *ngIf="!dateOfBirth.errors.pattern && !dateOfBirth.errors.validateAge">
-            User age should be at least 18
+          <span *ngIf="!dateOfBirth.errors.pattern && dateOfBirth.errors.validateAge">
+            User age should be at least {{ age }}
           </span>
         </div>
       </div>
