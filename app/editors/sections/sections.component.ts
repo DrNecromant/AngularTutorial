@@ -1,5 +1,7 @@
-import { Component, Output, Input, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 import { LoginService } from '../../services/api/login.service';
 import { SectionService } from '../../services/api/section.service';
@@ -11,7 +13,8 @@ import { Section } from '../../interfaces';
   templateUrl: 'app/editors/sections/sections.component.html',
 })
 
-export class SectionsComponent {
+export class SectionsComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject();
   sections: Section[];
   activeSection: string;
 
@@ -19,18 +22,22 @@ export class SectionsComponent {
     private loginService: LoginService,
     private sectionService: SectionService,
     private dragulaService: DragulaService,
-  ) {
-    this.read();
-    dragulaService.drop.subscribe(this.onDrop.bind(this));
-    this.loginService.userLogin$.subscribe(user => this.read())
-  }
+  ) { }
 
   @Output() sectionChanged: EventEmitter<string> = new EventEmitter<string>();
   @Input()
   set section(section: string) {
     if (section && section.length > 0) {
-        this.activeSection = section;
+      this.activeSection = section;
     }
+  }
+
+  ngOnInit() {
+    this.read();
+    this.loginService.userLogin$.subscribe(user => this.read());
+    this.dragulaService.drop.asObservable()
+      .takeUntil(this.destroy$)
+      .subscribe(this.onDrop.bind(this));
   }
 
   read() {
@@ -61,7 +68,11 @@ export class SectionsComponent {
       this.sections = arr.map((li: HTMLLIElement) => {
         return { title: li.textContent.trim() }
       });
-      //this.writeSections().subscribe();
+      // this.sectionService.writeSections(this.sections).subscribe();
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
   }
 }
