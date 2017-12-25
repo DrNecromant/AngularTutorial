@@ -1,13 +1,28 @@
-<div class="input-group" style="padding-bottom:20px">
+<input
+  type="text"
+  class="form-control"
+  style="margin-bottom: 20px"
+  #filter
+  (keyup)="0"
+  placeholder="Filter sections"
+>
+
+<div class="input-group" style="padding-bottom: 20px">
   <input type="text" class="form-control" #sectiontext>
   <span class="input-group-btn">
-    <button class="btn btn-default" type="button" (click)="add(sectiontext.value); sectiontext.value=null">Add</button>
+    <button
+      class="btn btn-default"
+      type="button"
+      (click)="add(sectiontext.value); sectiontext.value=null"
+    >
+      Add
+    </button>
   </span>
 </div>
 
 <ul class="list-group" [dragula]="'sections'">
-  <li *ngFor="let section of sections"
-    [ngClass]="{active:section.title==activeSection}"
+  <li *ngFor="let section of sections | sectionFilter: filter.value"
+    [ngClass]="{ active: section.title == activeSection }"
     (click)="show(section)" class="list-group-item">
     {{ section.title }}
   </li>

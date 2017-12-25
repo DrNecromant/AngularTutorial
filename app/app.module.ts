@@ -21,6 +21,8 @@ import { LoginService } from './services/api/login.service';
 import { EqualToValidator } from './directives/EqualToValidator';
 import { UserUniqueValidator } from './directives/UserUniqueValidator';
 
+import { SectionFilterPipe } from './pipes/sectionFilter.pipe';
+
 const appRoutes: Routes = [
   { path: '', component: EditorComponent },
   { path: 'register', component: UserFormComponent },
@@ -48,6 +50,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     EqualToValidator,
     UserUniqueValidator,
+    SectionFilterPipe,
   ],
   providers: [
     NotesService,
