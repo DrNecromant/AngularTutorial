@@ -8,9 +8,9 @@
 
   <div class="panel-body">
     <div class="form-group">
-      <textarea #notetext></textarea>
+      <textarea [(ngModel)]="notetext" #newnote></textarea>
     </div>
-    <button class="btn btn-default" (click)="add(notetext.value); notetext.value=null">Add</button>
+    <button class="btn btn-default" (click)="add(); newnote.value=null">Add</button>
   </div>
 </div>
 

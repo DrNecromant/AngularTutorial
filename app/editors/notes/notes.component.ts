@@ -13,6 +13,7 @@ import { Note } from '../../interfaces';
 
 export class NotesComponent implements OnChanges {
   private notesUrl = 'notes';
+  notetext: string;
   notes: Note[];
   @Input() section: string;
 
@@ -27,9 +28,9 @@ export class NotesComponent implements OnChanges {
       .subscribe(notes => { this.notes = notes });
   }
 
-  add(notetext: string) {
-    if (!notetext) return;  // do not add note if input is empty
-    let note = { text: notetext, section: this.section, created: new Date() };
+  add() {
+    if (!this.notetext) return;  // do not add note if input is empty
+    let note = { text: this.notetext, section: this.section, created: new Date() };
     this.notesService.addNote(note).subscribe(response => this.read());
   }
 
