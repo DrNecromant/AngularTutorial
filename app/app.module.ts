@@ -21,6 +21,7 @@ import { CanDeactivateNote  } from './services/deactivation.service';
 
 import { EqualToValidator } from './directives/EqualToValidator';
 import { UserUniqueValidator } from './directives/UserUniqueValidator';
+import { UserAgeValidator } from './directives/UserAgeValidator';
 
 import { SectionFilterPipe } from './pipes/sectionFilter.pipe';
 import { NoteFilterPipe } from './pipes/noteFilter.pipe';
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     EqualToValidator,
     UserUniqueValidator,
+    UserAgeValidator,
     SectionFilterPipe,
     NoteFilterPipe,
   ],
