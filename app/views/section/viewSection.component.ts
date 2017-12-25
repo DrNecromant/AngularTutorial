@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 import { NotesService } from '../../services/api/note.service';
 import { Note } from '../../interfaces'
@@ -10,7 +11,7 @@ import { Note } from '../../interfaces'
 
 export class ViewSectionComponent implements OnInit {
   sectiontext: string;
-  notes: Note[];
+  notes$: Observable<Note[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,7 +20,6 @@ export class ViewSectionComponent implements OnInit {
 
   ngOnInit() {
     this.sectiontext = this.route.snapshot.params["name"];
-    this.notesService.getNotes(this.sectiontext)
-      .subscribe(notes => { this.notes = notes });
+    this.notes$ = this.notesService.getNotes(this.sectiontext);
   }
 }
