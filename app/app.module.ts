@@ -23,6 +23,7 @@ import { EqualToValidator } from './directives/EqualToValidator';
 import { UserUniqueValidator } from './directives/UserUniqueValidator';
 
 import { SectionFilterPipe } from './pipes/sectionFilter.pipe';
+import { NoteFilterPipe } from './pipes/noteFilter.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: EditorComponent, canDeactivate: [CanDeactivateNote] },
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     EqualToValidator,
     UserUniqueValidator,
     SectionFilterPipe,
+    NoteFilterPipe,
   ],
   providers: [
     NotesService,

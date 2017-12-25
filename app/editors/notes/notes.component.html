@@ -1,3 +1,12 @@
+<input
+  type="text"
+  class="form-control"
+  style="margin-bottom: 20px"
+  #filter
+  (keyup)="0"
+  placeholder="Filter notes"
+>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
@@ -18,7 +27,7 @@
   <div class="panel-heading">Notes</div>
 
   <ul class="list-group" ng-repeat="note in notes">
-    <li *ngFor="let note of notes" class="list-group-item">
+    <li *ngFor="let note of notes | noteFilter: filter.value " class="list-group-item">
       {{ note.text }}
       ({{ note.created | date: 'HH:mm dd.MM.yyyy' }})
       <button class="btn btn-info btn-xs pull-right" (click)="remove(note._id)">remove</button>
