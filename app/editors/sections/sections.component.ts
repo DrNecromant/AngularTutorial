@@ -50,8 +50,7 @@ export class SectionsComponent implements OnInit, OnDestroy {
   }
 
   show(section: Section) {
-    this.activeSection = section.title;
-    this.sectionChanged.emit(this.activeSection);
+    this.sectionChanged.emit(section.title);
   }
 
   add(sectiontext) {

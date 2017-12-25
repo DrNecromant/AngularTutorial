@@ -17,6 +17,7 @@ import { PageNotFoundComponent } from './errorPages/pageNotFound/pageNotFound.co
 import { NotesService } from './services/api/note.service';
 import { SectionService } from './services/api/section.service';
 import { LoginService } from './services/api/login.service';
+import { CanDeactivateNote  } from './services/deactivation.service';
 
 import { EqualToValidator } from './directives/EqualToValidator';
 import { UserUniqueValidator } from './directives/UserUniqueValidator';
@@ -24,10 +25,10 @@ import { UserUniqueValidator } from './directives/UserUniqueValidator';
 import { SectionFilterPipe } from './pipes/sectionFilter.pipe';
 
 const appRoutes: Routes = [
-  { path: '', component: EditorComponent },
+  { path: '', component: EditorComponent, canDeactivate: [CanDeactivateNote] },
   { path: 'register', component: UserFormComponent },
   { path: 'section/:name', component: ViewSectionComponent },
-  { path: ':name', component: EditorComponent },
+  { path: ':name', component: EditorComponent, canDeactivate: [CanDeactivateNote] },
   { path: '**', component: PageNotFoundComponent },
 ];
 
@@ -56,6 +57,7 @@ const appRoutes: Routes = [
     NotesService,
     SectionService,
     LoginService,
+    CanDeactivateNote,
   ],
   bootstrap: [ AppComponent ]
 })
