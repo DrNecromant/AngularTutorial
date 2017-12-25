@@ -30,12 +30,12 @@ app.use([
 
 var db = new Db(
   'tutor',
-  new Server("localhost", 27017, {safe: true}, {auto_reconnect: true}, {})
+  new Server("localhost", 27017, { safe: true }, { auto_reconnect: true }, { })
 );
 
 db.open(function(err) {
   if (err) console.log(err);
-	else console.log("Connected to localhost...");
+	else console.log('Connected to localhost...');
   db.collection('notes', function(error, notes) {
 	   db.notes = notes;
 	});
@@ -43,7 +43,7 @@ db.open(function(err) {
 		db.sections = sections;
 	});
   db.collection('users', function(error, users) {
-			db.users = users;
+		db.users = users;
 	});
 });
 
@@ -84,7 +84,7 @@ app.post("/notes", function(req, res) {
 
 app.delete("/notes", function(req, res) {
 	var id = new ObjectID(req.query.id);
-	db.notes.remove({_id: id}, function(err) {
+	db.notes.remove({ _id: id }, function(err) {
 		if (err) console.log(err);
 		else res.end();
 	});
@@ -109,6 +109,18 @@ app.post("/sections", function(req, res) {
 	db.users.update({ name: userName }, { $push: { sections: req.body }}, function() {
 		res.end();
 	});
+});
+
+app.post("/replace", function(req, res) {
+	console.log(req.body);
+	if (req.body.length == 0) { res.end() }  // Do not clean section on empty body
+  var userName = req.session.userName || "demo";
+  db.users.find({ name: userName }).toArray(function(err, items) {
+    if (items.length == 0) res.end();
+    else db.users.update({ name: userName }, { $set: { sections: req.body }}, function() {
+      res.end();
+    });
+  });
 });
 
 // =====

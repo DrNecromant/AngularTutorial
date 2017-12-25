@@ -41,7 +41,7 @@ export class SectionsComponent implements OnInit, OnDestroy {
   }
 
   read() {
-    this.sectionService.getSections().subscribe(sections=> {
+    this.sectionService.getSections().subscribe(sections => {
       this.sections = sections;
       if (this.activeSection == null && this.sections.length > 0) {
         this.show(this.sections[0]);
@@ -68,7 +68,8 @@ export class SectionsComponent implements OnInit, OnDestroy {
       this.sections = arr.map((li: HTMLLIElement) => {
         return { title: li.textContent.trim() }
       });
-      // this.sectionService.writeSections(this.sections).subscribe();
+      this.sectionService.writeSections(this.sections)
+        .subscribe(response => this.read());
     }
   }
 
