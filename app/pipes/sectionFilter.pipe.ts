@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Section } from '../interfaces';
 
 @Pipe({
-    name: 'sectionFilter'
+  name: 'sectionFilter'
 })
 
 export class SectionFilterPipe implements PipeTransform {
