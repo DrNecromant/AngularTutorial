@@ -44,6 +44,28 @@
       </div>
 
       <div class="form-group">
+        <label for="country">Country</label>
+        <select id="country" name="country" [(ngModel)]="user.country"
+          class="form-control" (ngModelChange)="changeCountry($event)"
+        >
+          <option *ngFor="let country of countries$ | async" [attr.value]="country">
+            {{ country }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="town">Town</label>
+        <select id="town" name="town" [(ngModel)]="user.town"
+          class="form-control"
+        >
+          <option *ngFor="let town of towns$ | async" [attr.value]="town">
+            {{ town }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
         <div class="checkbox">
           <label>
             <input type="checkbox" name="subscribe" [(ngModel)]="user.subscribe">
