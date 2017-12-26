@@ -32,7 +32,7 @@
         <label for="dateOfBirth">Date of birth</label>
         <input type="text" class="form-control" id="dateOfBirth" required
           name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="user.dateOfBirth"
-          pattern="[0-9][0-9]\.[0-1][0-9]\.[1-2][0-9][0-9][0-9]" validateAge="18">
+          pattern="[0-9][0-9]\.[0-1][0-9]\.[1-2][0-9][0-9][0-9]" [validateAge]="minAge">
         <div *ngIf="dateOfBirth.errors && dateOfBirth.touched">
           <span *ngIf="dateOfBirth.errors.pattern">
             Date of birth should be in format dd.mm.yyyy

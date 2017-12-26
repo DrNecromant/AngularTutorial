@@ -1,4 +1,4 @@
-import { Directive, Attribute } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { Validator, NG_VALIDATORS, AbstractControl } from '@angular/forms';
 
 @Directive({
@@ -12,7 +12,7 @@ import { Validator, NG_VALIDATORS, AbstractControl } from '@angular/forms';
 
 export class UserAgeValidator implements Validator {
 
-  constructor(@Attribute("validateAge") public validateAge: string) { }
+  @Input() validateAge: string;
 
   validate(c: AbstractControl): { [key: string]: any } {
     let v = c.value;

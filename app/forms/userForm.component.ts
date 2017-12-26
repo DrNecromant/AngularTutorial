@@ -17,6 +17,7 @@ import { User } from '../interfaces';
 
 export class UserFormComponent {
   user: User = new User;
+  minAge: string = '18';
 
   constructor(
     private http: Http,
