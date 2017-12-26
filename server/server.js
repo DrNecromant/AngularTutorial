@@ -45,6 +45,9 @@ db.open(function(err) {
   db.collection('users', function(error, users) {
 		db.users = users;
 	});
+  db.collection('locations', function(error, locations) {
+    db.locations = locations;
+  });
 });
 
 // =============
@@ -143,6 +146,26 @@ app.get("/checkUserUnique", function(req, res) {
     .toArray(function(err, items) {
     		res.send(!(items.length > 0));
 	   });
+});
+
+// =========
+// Locations
+// =========
+
+app.get("/countries", function(req, res) {
+  db.locations.distinct("country", function(err, items) {
+    res.send(items);
+  });
+});
+
+app.get("/towns", function(req, res) {
+  if (!('country' in req.query)) res.send([]);
+  else {
+    db.locations.findOne(req.query, function(err, item) {
+      if (item && 'towns' in item) res.send(item["towns"]);
+      else res.send([]);
+    });
+  };
 });
 
 // ==========
