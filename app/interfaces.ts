@@ -16,6 +16,8 @@ export class User {
   subscribe: boolean;
   email: string;
   dateOfBirth: string;
+  country: string;
+  town: string;
 }
 
 export class LoginUser {
