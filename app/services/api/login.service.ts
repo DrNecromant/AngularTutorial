@@ -6,12 +6,14 @@ import 'rxjs/add/operator/do';
 import { Subject } from 'rxjs/Subject';
 
 import { LoginUser } from '../../interfaces'
+import { User } from '../../interfaces'
 
 @Injectable()
 export class LoginService {
   private loginUrl = 'login';
   private logoutUrl = 'logout';
   private userUrl = 'user';
+  private usersUrl = 'users';
   private userLoginSource = new Subject<LoginUser>();
 
   userLogin$ = this.userLoginSource.asObservable();
@@ -42,5 +44,9 @@ export class LoginService {
     return this.http.get(this.userUrl)
       .map(res => res.text()? res.json():null)
       .do(user => this.loggedIn = user? true:false);
+   }
+
+   addUser(user: User) {
+     return this.http.post(this.usersUrl, user);
    }
 }

@@ -53,10 +53,10 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.http.post("users", this.user).subscribe(res => {
+    this.loginService.addUser(this.user).subscribe(res => {
       let loginUser = { userName: this.user.name, password: this.user.password }
       this.loginService.login(loginUser)
-        .subscribe(res=>{if (res) this.router.navigateByUrl("/")});
+        .subscribe(res=>{if (res) this.router.navigateByUrl('/')});
     });
 
   }
